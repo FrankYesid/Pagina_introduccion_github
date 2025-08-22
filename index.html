@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación con Git y GitHub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .section-title {
+            border-left: 8px solid #8b5cf6; /* Purple left border */
+            padding-left: 1rem;
+        }
+        .workflow-step {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .workflow-step.active {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .workflow-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+        }
+        .workflow-detail.active {
+            max-height: 300px; /* Adjust as needed */
+            opacity: 1;
+        }
+        .match-item {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .match-item.selected {
+            border: 2px solid #3b82f6;
+            background-color: #dbeafe;
+        }
+        .match-item.correct {
+            border: 2px solid #22c55e;
+            background-color: #dcfce7;
+        }
+        .match-item.incorrect {
+            border: 2px solid #ef4444;
+            background-color: #fee2e2;
+        }
+        .explanation-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-4xl font-bold mb-2 md:mb-0">Curso: Calidad de Datos</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="data-quality-course.html" class="hover:text-blue-200 transition duration-300">Conceptos</a></li>
+                    <li><a href="data-quality-application.html" class="hover:text-blue-200 transition duration-300">Aplicación</a></li>
+                    <li><a href="data-quality-documentation.html" class="hover:text-blue-200 transition duration-300 font-bold">Documentación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-6 mt-8 bg-white rounded-lg shadow-xl">
+        <!-- Sección de Git y GitHub -->
+        <section id="git-github" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 section-title">Gestión de Documentación con Git y GitHub</h2>
+            <p class="text-lg leading-relaxed mb-6">
+                En los proyectos de datos, la **documentación** es tan vital como los propios datos. Documentos como diccionarios de datos, reglas de validación y reportes de perfilado aseguran que los datos se entiendan y utilicen correctamente. Dado que esta documentación evoluciona, herramientas como **Git** y **GitHub** son indispensables para su gestión.
+            </p>
+
+            <!-- ¿Qué es Git? -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-md mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">¿Qué es Git y por qué usarlo?</h3>
+                <p class="text-md text-gray-700 mb-4">
+                    **Git** es un **sistema de control de versiones** de código abierto. En términos sencillos, es como un historial de "guardar como" automático y superpoderoso para tus archivos. Te permite rastrear cada cambio que se hace a un documento, quién lo hizo y cuándo.
+                </p>
+                <h4 class="font-semibold text-gray-700 mb-2">Beneficios clave:</h4>
+                <ul class="list-disc list-inside text-md text-gray-700 space-y-2">
+                    <li><strong>Historial Completo:</strong> Puedes ver todas las versiones de un archivo y volver a cualquier estado anterior si es necesario.</li>
+                    <li><strong>Colaboración Segura:</strong> Permite que varias personas trabajen en los mismos documentos sin sobrescribirse los cambios mutuamente.</li>
+                    <li><strong>Auditoría:</strong> Es una herramienta fundamental para la **gobernanza de datos**, ya que te permite auditar los cambios en las reglas de calidad o las definiciones de los datos a lo largo del tiempo.</li>
+                </ul>
+            </div>
+
+            <!-- ¿Qué es GitHub? -->
+            <div class="bg-gray-50 p-6 rounded-lg shadow-md mb-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">¿Qué es GitHub y cómo se diferencia de Git?</h3>
+                <p class="text-md text-gray-700 mb-4">
+                    Mientras que Git es la herramienta que usas en tu computadora para rastrear cambios, **GitHub** es una **plataforma en la nube** que aloja tus proyectos Git. Piensa en GitHub como una red social para tus proyectos.
+                </p>
+                <h4 class="font-semibold text-gray-700 mb-2">Diferencias clave:</h4>
+                <ul class="list-disc list-inside text-md text-gray-700 space-y-2">
+                    <li><strong>Git:</strong> Es local. El "cerebro" que controla el historial de versiones en tu máquina.</li>
+                    <li><strong>GitHub:</strong> Es remoto. Es el lugar donde subes tu proyecto Git para compartirlo, colaborar con otros y tener un respaldo en línea.</li>
+                </ul>
+            </div>
+
+            <!-- Flujo de Trabajo Interactivo -->
+            <h3 class="text-2xl font-bold text-gray-900 mb-4 mt-10 section-title">Flujo de Trabajo Típico para Documentación</h3>
+            <p class="text-lg leading-relaxed mb-6">
+                Este es un flujo de trabajo simplificado de cómo un equipo puede usar Git y GitHub para colaborar en la documentación de calidad de datos. Haz clic en cada paso para ver más detalles.
+            </p>
+
+            <div class="flex flex-col items-center space-y-8">
+                <!-- Paso 1: Clonar/Crear Repositorio -->
+                <div class="workflow-step bg-purple-100 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h3 class="text-2xl font-semibold text-purple-800 mb-2">1. Clonar o Crear un Repositorio</h3>
+                    <div class="workflow-detail mt-4 p-3 bg-purple-50 rounded-md text-left text-gray-700">
+                        <p><strong>Detalle:</strong> El primer paso es tener una copia del proyecto. Si el repositorio ya existe en GitHub, lo "clonas" a tu computadora. Si es un proyecto nuevo, creas un repositorio local y luego lo subes a GitHub.</p>
+                    </div>
+                </div>
+                <div class="text-4xl text-purple-600">↓</div>
+                <!-- Paso 2: Crear una Rama -->
+                <div class="workflow-step bg-purple-100 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h3 class="text-2xl font-semibold text-purple-800 mb-2">2. Crear una Rama (Branch)</h3>
+                    <div class="workflow-detail mt-4 p-3 bg-purple-50 rounded-md text-left text-gray-700">
+                        <p><strong>Detalle:</strong> Antes de hacer cambios, creas una "rama". Esto es como una línea de tiempo paralela. Te permite trabajar en nuevas reglas o definiciones sin afectar la versión principal y estable de la documentación.</p>
+                    </div>
+                </div>
+                <div class="text-4xl text-purple-600">↓</div>
+                <!-- Paso 3: Realizar Cambios y Commits -->
+                <div class="workflow-step bg-purple-100 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h3 class="text-2xl font-semibold text-purple-800 mb-2">3. Realizar Cambios y Commits</h3>
+                    <div class="workflow-detail mt-4 p-3 bg-purple-50 rounded-md text-left text-gray-700">
+                        <p><strong>Detalle:</strong> Modificas los archivos de documentación (ej. `diccionario_datos.md`). Cada vez que completas una tarea lógica (ej. "Añadir definición de campo 'ID_Cliente'"), guardas tus cambios con un `commit`. Cada commit tiene un mensaje que explica lo que hiciste.</p>
+                    </div>
+                </div>
+                <div class="text-4xl text-purple-600">↓</div>
+                <!-- Paso 4: Subir Cambios (Push) -->
+                <div class="workflow-step bg-purple-100 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h3 class="text-2xl font-semibold text-purple-800 mb-2">4. Subir Cambios (Push)</h3>
+                    <div class="workflow-detail mt-4 p-3 bg-purple-50 rounded-md text-left text-gray-700">
+                        <p><strong>Detalle:</strong> Una vez que has hecho varios commits en tu rama, haces `push` para subir tu rama y sus cambios a GitHub. Ahora tus cambios están respaldados y visibles para tu equipo.</p>
+                    </div>
+                </div>
+                <div class="text-4xl text-purple-600">↓</div>
+                <!-- Paso 5: Crear un Pull Request -->
+                <div class="workflow-step bg-purple-100 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h3 class="text-2xl font-semibold text-purple-800 mb-2">5. Crear un Pull Request (PR)</h3>
+                    <div class="workflow-detail mt-4 p-3 bg-purple-50 rounded-md text-left text-gray-700">
+                        <p><strong>Detalle:</strong> En GitHub, creas un "Pull Request". Esta es una solicitud formal para que tus compañeros de equipo revisen los cambios que hiciste en tu rama. Pueden dejar comentarios y sugerir mejoras. Es el corazón de la colaboración y la gobernanza.</p>
+                    </div>
+                </div>
+                <div class="text-4xl text-purple-600">↓</div>
+                <!-- Paso 6: Fusionar (Merge) -->
+                <div class="workflow-step bg-purple-100 p-6 rounded-lg shadow-md w-full max-w-lg text-center">
+                    <h3 class="text-2xl font-semibold text-purple-800 mb-2">6. Fusionar (Merge)</h3>
+                    <div class="workflow-detail mt-4 p-3 bg-purple-50 rounded-md text-left text-gray-700">
+                        <p><strong>Detalle:</strong> Una vez que el Pull Request es aprobado, los cambios de tu rama se "fusionan" (merge) con la rama principal. ¡Felicidades! Tu documentación ha sido actualizada de forma segura y colaborativa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <section id="match-activity" class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 section-title">Actividad: Empareja los Conceptos</h3>
+                <p class="text-md leading-relaxed text-gray-700 mb-6">
+                    Haz clic en un concepto de la columna izquierda y luego haz clic en su descripción correspondiente en la columna derecha. Si la respuesta es correcta, verás una explicación.
+                </p>
+
+                <div class="flex flex-col md:flex-row justify-center items-stretch md:space-x-8 space-y-6 md:space-y-0">
+                    <!-- Columna de Conceptos -->
+                    <div id="concepts-column" class="flex-1 bg-gray-50 p-6 rounded-lg shadow-md space-y-4 flex flex-col items-center">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Conceptos</h4>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="concept" data-match="github">GitHub</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="concept" data-match="commit">Commit</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="concept" data-match="branch">Rama (Branch)</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="concept" data-match="git">Git</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="concept" data-match="pull-request">Pull Request</div>
+                    </div>
+
+                    <!-- Columna de Descripciones -->
+                    <div id="descriptions-column" class="flex-1 bg-gray-50 p-6 rounded-lg shadow-md space-y-4 flex flex-col items-center">
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Descripciones</h4>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="description" data-match="branch">Una versión independiente del repositorio para trabajar sin afectar la principal.</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="description" data-match="pull-request">Una solicitud para que tus compañeros de equipo revisen y fusionen tus cambios.</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="description" data-match="github">Una plataforma en la nube para alojar y colaborar en proyectos.</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="description" data-match="git">Un sistema de control de versiones local que rastrea los cambios de archivos.</div>
+                        <div class="match-item p-4 rounded-lg bg-white shadow w-full text-center" data-type="description" data-match="commit">Una instantánea o "punto de guardado" de tus archivos en un momento dado.</div>
+                    </div>
+                </div>
+                
+                <div id="explanation-container" class="mt-8 hidden">
+                    <div id="explanation-box" class="explanation-box"></div>
+                </div>
+
+                <div class="flex justify-center mt-6">
+                    <button id="reset-activity-btn" class="bg-gray-300 text-gray-800 px-6 py-3 rounded-lg shadow-md hover:bg-gray-400 transition duration-300">
+                        Reiniciar Actividad
+                    </button>
+                </div>
+            </section>
+
+            <!-- Sección de instrucciones de GitHub -->
+            <section id="github-getting-started" class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 section-title">Primeros Pasos en la Plataforma GitHub</h3>
+                <p class="text-lg leading-relaxed mb-6">
+                    Antes de empezar a trabajar con Git en tu computadora, necesitas un lugar en la nube donde alojar tus proyectos. Aquí te mostramos cómo empezar en la plataforma de GitHub.
+                </p>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">1. Creación de la Cuenta y Acceso</h4>
+                    <p class="text-md text-gray-700 mb-4">
+                        Ve a <a href="https://github.com" target="_blank" class="text-blue-600 hover:underline">github.com</a> y haz clic en "Sign up" (Registrarse). Sigue los pasos para crear tu cuenta. Una vez creada, usa tu nombre de usuario y contraseña para "Sign in" (Iniciar sesión).
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">2. Creación de un Nuevo Repositorio</h4>
+                    <p class="text-md text-gray-700 mb-2">
+                        Una vez que hayas iniciado sesión, puedes crear un nuevo repositorio para tu documentación de calidad de datos.
+                    </p>
+                    <ul class="list-decimal list-inside text-md text-gray-700 space-y-2">
+                        <li>En la esquina superior derecha, haz clic en el signo **+** y selecciona **New repository**.</li>
+                        <li>Dale un **nombre** a tu repositorio (por ejemplo, `documentacion-calidad-datos`).</li>
+                        <li>Añade una **descripción** opcional.</li>
+                        <li>Elige si quieres que sea **público** o **privado**. Para proyectos internos, privado es la mejor opción.</li>
+                        <li>Marca la opción **Add a README file** para inicializar el repositorio.</li>
+                        <li>Haz clic en **Create repository**. ¡Listo! Ya tienes un espacio en la nube para tu proyecto.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-3">3. Navegación y Uso General</h4>
+                    <p class="text-md text-gray-700 mb-2">
+                        El repositorio es el centro de tu proyecto. Aquí puedes:
+                    </p>
+                    <ul class="list-disc list-inside text-md text-gray-700 space-y-2">
+                        <li><strong>Ver los archivos:</strong> La vista principal muestra todos los archivos y carpetas. Puedes hacer clic en ellos para ver su contenido.</li>
+                        <li><strong>Revisar el historial:</strong> Haz clic en el número de "commits" para ver un historial detallado de todos los cambios realizados.</li>
+                        <li><strong>Gestionar ramas:</strong> Usa el menú desplegable de "branch" para ver las ramas existentes y crear nuevas.</li>
+                        <li><strong>Abrir Pull Requests:</strong> Cuando subes una nueva rama, GitHub te dará la opción de crear un "Pull Request" para que tu equipo lo revise.</li>
+                    </ul>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-6 mt-12 text-center">
+        <p>&copy; 2025 Curso de Calidad de Datos. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const workflowSteps = document.querySelectorAll('.workflow-step');
+            workflowSteps.forEach(step => {
+                step.addEventListener('click', () => {
+                    step.classList.toggle('active');
+                    const detail = step.querySelector('.workflow-detail');
+                    if (detail) {
+                        detail.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Match Activity Logic
+            const matchItems = document.querySelectorAll('.match-item');
+            const explanationContainer = document.getElementById('explanation-container');
+            const explanationBox = document.getElementById('explanation-box');
+            const resetButton = document.getElementById('reset-activity-btn');
+
+            let selectedConcept = null;
+            let selectedDescription = null;
+            
+            const matchExplanations = {
+                "git-github": "<strong>Correcto.</strong> Git es la herramienta local, mientras que GitHub es la plataforma remota que aloja los proyectos para colaborar.",
+                "commit-commit": "<strong>Correcto.</strong> Un `commit` es un registro de los cambios, una instantánea de tu proyecto en el tiempo.",
+                "branch-branch": "<strong>Correcto.</strong> Una rama es una copia del proyecto que te permite hacer cambios sin afectar la versión principal, facilitando el desarrollo de nuevas funciones.",
+                "pull-request-pull-request": "<strong>Correcto.</strong> Un Pull Request es una solicitud formal para que un equipo revise tus cambios antes de fusionarlos en la rama principal. Es clave para la colaboración.",
+                "github-github": "<strong>Correcto.</strong> GitHub es la plataforma en la nube que permite alojar proyectos, colaborar con otros desarrolladores y tener un respaldo en línea.",
+                "git-git": "<strong>Correcto.</strong> Git es la herramienta de software instalada en tu equipo que te permite gestionar y versionar los cambios localmente.",
+            };
+
+            const allMatches = {
+                "git": "git",
+                "github": "github",
+                "commit": "commit",
+                "branch": "branch",
+                "pull-request": "pull-request"
+            };
+
+            function resetActivity() {
+                selectedConcept = null;
+                selectedDescription = null;
+                explanationContainer.classList.add('hidden');
+                explanationBox.innerHTML = '';
+                matchItems.forEach(item => {
+                    item.classList.remove('selected', 'correct', 'incorrect');
+                    item.style.pointerEvents = 'auto'; // Re-enable clicks
+                });
+            }
+
+            resetButton.addEventListener('click', resetActivity);
+
+            matchItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    if (item.classList.contains('correct') || item.classList.contains('incorrect')) {
+                        return;
+                    }
+
+                    const itemType = item.dataset.type;
+
+                    if (itemType === 'concept') {
+                        // Clear previous concept selection
+                        if (selectedConcept) {
+                            selectedConcept.classList.remove('selected');
+                        }
+                        selectedConcept = item;
+                        item.classList.add('selected');
+                        explanationContainer.classList.add('hidden');
+                    } else if (itemType === 'description' && selectedConcept) {
+                        selectedDescription = item;
+                        checkMatch();
+                    }
+                });
+            });
+
+            function checkMatch() {
+                // Se guarda la referencia de los elementos seleccionados en variables locales
+                // para evitar el error 'Cannot read properties of null'
+                const conceptToHandle = selectedConcept;
+                const descriptionToHandle = selectedDescription;
+
+                // Si por alguna razón la referencia es nula, se detiene la ejecución
+                if (!conceptToHandle || !descriptionToHandle) {
+                    return;
+                }
+
+                const conceptId = conceptToHandle.dataset.match;
+                const descriptionId = descriptionToHandle.dataset.match;
+
+                // Resetear las variables globales después de obtener las referencias locales
+                selectedConcept = null;
+                selectedDescription = null;
+
+                if (allMatches[conceptId] === descriptionId) {
+                    conceptToHandle.classList.add('correct');
+                    descriptionToHandle.classList.add('correct');
+                    conceptToHandle.classList.remove('selected');
+                    descriptionToHandle.classList.remove('selected');
+                    
+                    conceptToHandle.style.pointerEvents = 'none';
+                    descriptionToHandle.style.pointerEvents = 'none';
+                    explanationBox.innerHTML = matchExplanations[`${conceptId}-${descriptionId}`];
+                } else {
+                    conceptToHandle.classList.add('incorrect');
+                    descriptionToHandle.classList.add('incorrect');
+                    explanationBox.innerHTML = "<strong>Incorrecto.</strong> Vuelve a intentarlo. Recuerda que solo los pares correctos se quedan marcados.";
+                    
+                    // Se usa la referencia local en el setTimeout para asegurar que no sea nula
+                    setTimeout(() => {
+                        conceptToHandle.classList.remove('selected', 'incorrect');
+                        descriptionToHandle.classList.remove('selected', 'incorrect');
+                    }, 1000);
+                }
+                explanationContainer.classList.remove('hidden');
+            }
+
+            // The Gemini API integration section was removed as requested.
+
+        });
+    </script>
+</body>
+</html>
